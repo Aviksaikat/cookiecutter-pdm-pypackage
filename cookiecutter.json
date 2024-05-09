@@ -1,0 +1,21 @@
+{
+    "full_name": "King Arthur",
+    "email": "king.arthur@camelot.bt",
+    "github_username": "king-arthur",
+    "project_name": "Holy Grail",
+    "dist_name": "{{cookiecutter.project_name.lower().replace(' ', '-')}}",
+    "package_name": "{{cookiecutter.dist_name.replace('-', '_')}}",
+    "project_short_description": "",
+    "repository_name": "{{cookiecutter.github_username}}/{{cookiecutter.dist_name}}",
+    "repository_url": "https://github.com/{{cookiecutter.repository_name}}",
+    "docs_url": "https://{{cookiecutter.github_username}}.github.io/{{cookiecutter.dist_name}}/",
+    "open_source_license": ["MIT license", "BSD license", "ISC license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
+    "python_version": "3.9",
+    "asyncio": ["Y", "N"],
+    "codecov": ["Y","N"],
+    "deptry": ["Y","N"],
+    "mkdocs": ["Y", "N"],
+    "docs_icon": "material/library",
+    "docs_color_primary": ["red", "pink", "purple", "deep purple", "indigo", "blue", "light blue", "cyan", "teal", "green", "light green", "lime", "yellow", "amber", "orange", "deep orange", "brown", "grey", "blue grey", "black", "white"],
+    "docs_color_accent": ["red","pink","purple","deep purple","indigo","blue","light blue","cyan","teal","green","light green","lime","yellow","amber","orange","deep orange"]
+}

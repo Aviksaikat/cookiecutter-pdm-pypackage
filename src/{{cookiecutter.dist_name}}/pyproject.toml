@@ -1,0 +1,138 @@
+[project]
+name = "{{ cookiecutter.dist_name }}"
+authors = [
+  { name = "{{ cookiecutter.dist_name }}", email = "{{ cookiecutter.email }}" }
+]
+description = "{{ cookiecutter.project_short_description }}"
+readme = "README.md"
+dynamic = ["version"]
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+]
+requires-python = ">={{ cookiecutter.python_version }}"
+dependencies = [
+]
+
+[project.urls]
+Documentation = "{{ cookiecutter.docs_url }}"
+Source = "{{ cookiecutter.repository_url }}"
+
+
+[tool.mypy]
+files = ["{{cookiecutter.package_name}}"]
+disallow_untyped_defs = "True"
+disallow_any_unimported = "True"
+no_implicit_optional = "True"
+check_untyped_defs = "True"
+warn_return_any = "True"
+warn_unused_ignores = "True"
+show_error_codes = "True"
+
+
+[tool.ruff]
+target-version = "py{{ cookiecutter.python_version | replace(".", "") }}"
+line-length = 120
+[tool.ruff.lint]
+extend-select = ["I"]
+select = [
+    "A",
+    "ARG",
+    "B",
+    "C",
+    "DTZ",
+    "E",
+    "EM",
+    "F",
+    "FBT",
+    "ICN",
+    "ISC",
+    "N",
+    "PLC",
+    "PLE",
+    "PLR",
+    "PLW",
+    "Q",
+    "RUF",
+    "S",
+    "T",
+    "TID",
+    "UP",
+    "W",
+    "YTT",
+]
+ignore = [
+    # Allow non-abstract empty methods in abstract base classes
+    "B027",
+    # Allow boolean positional values in function calls, like `dict.get(... True)`
+    "FBT003",
+    # Ignore checks for possible passwords
+    "S105",
+    "S106",
+    "S107",
+    # Ignore complexity
+    "C901",
+    "PLR0911",
+    "PLR0912",
+    "PLR0913",
+    "PLR0915",
+]
+
+[tool.pytest.ini_options]
+addopts = "--cov={{ cookiecutter.package_name }}/ --cov-report=term-missing"
+{% if cookiecutter.asyncio == "Y" -%}
+  asyncio_mode = "strict"
+{%- endif %}
+
+
+[tool.pdm.dev-dependencies]
+test = [
+  "pytest>=8.2.0",
+  {% if cookiecutter.codecov == "Y" -%}
+    "pytest-cov>=5.0.0"
+  {% endif -%}
+  {% if cookiecutter.asyncio == "Y" -%}
+    "pytest-asyncio",
+    {%- endif %}
+  ]
+dev = [
+{% if cookiecutter.deptry == "Y" -%}
+  "deptry>=0.16.1",
+{% endif -%}
+  "mypy>=1.10.0",
+  "ruff>=0.4.3",
+  "pre-commit>=3.7.0",
+  "tox>=4.15.0"
+]
+{% if cookiecutter.mkdocs == "Y" -%}
+docs = [
+  "mkdocs>=1.6.0",
+  "mkdocs-material>=9.5.21",
+  "mkdocstrings[python]>=0.25.1"
+]
+{%- endif %}
+
+
+[tool.pdm.scripts]
+test = "pytest"
+test-cov-xml = "pytest --cov-report=xml"
+lint = [
+  "ruff format .",
+  "ruff --fix .",
+  "mypy {{ cookiecutter.package_name }}/",
+]
+lint-check = [
+  "ruff format --check .",
+  "ruff .",
+  "mypy {{ cookiecutter.package_name }}/",
+]
+docs-serve = "mkdocs serve"
+docs-build = "mkdocs build"
+
+[tool.pdm.build]
+# excludes = ["./**/.git"]
+# package-dir = "."
+includes = ["{{cookiecutter.package_name}}"]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"

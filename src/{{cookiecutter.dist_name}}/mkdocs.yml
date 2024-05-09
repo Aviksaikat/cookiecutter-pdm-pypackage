@@ -1,0 +1,64 @@
+site_name: {{ cookiecutter.project_name }}
+site_description: {{ cookiecutter.project_short_description }}
+
+repo_url: {{ cookiecutter.repository_url }}
+repo_name: {{ cookiecutter.repository_name }}
+
+theme:
+    name: material
+    icon:
+        logo: {{ cookiecutter.docs_icon }}
+    palette:
+        # Palette toggle for automatic mode
+        - media: "(prefers-color-scheme)"
+          toggle:
+            icon: material/brightness-auto
+            name: Switch to light mode
+
+        # Palette toggle for light mode
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          primary: {{ cookiecutter.docs_color_primary }}
+          accent: {{ cookiecutter.docs_color_accent }}
+          toggle:
+            icon: material/brightness-7
+            name: Switch to dark mode
+
+        # Palette toggle for dark mode
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          primary: {{ cookiecutter.docs_color_primary }}
+          accent: {{ cookiecutter.docs_color_accent }}
+          toggle:
+            icon: material/brightness-4
+            name: Switch to light mode
+
+markdown_extensions:
+    - toc:
+        permalink: true
+    - pymdownx.highlight:
+        anchor_linenums: true
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+    - pymdownx.superfences
+
+plugins:
+    - search
+    - mkdocstrings:
+        handlers:
+            python:
+                import:
+                    - https://docs.python.org/{{ cookiecutter.python_version }}/objects.inv
+                options:
+                    docstring_style: google
+
+watch:
+    - docs
+    - {{ cookiecutter.package_name }}
+
+nav:
+    - About: index.md
+    - Reference:
+        - {{ cookiecutter.package_name }}: reference/{{ cookiecutter.package_name }}.md
