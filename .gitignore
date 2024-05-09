@@ -112,3 +112,4 @@ ENV/
 
 # Test project
 holy-grail/
+*.tape
