@@ -41,7 +41,7 @@ cruft create https://github.com/Aviksaikat/cookiecutter-pdm-pypackage
 ```
 
 ## Demo
-
+![](./media/demo.gif)
 
 
 ## License
