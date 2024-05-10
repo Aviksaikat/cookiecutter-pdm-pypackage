@@ -1,4 +1,4 @@
-# Cookiecutter Hipster PyPackage
+# Cookiecutter Pdm PyPackage
 
 Cookiecutter template for a cutting-edge Python package: pdm, ruff, mypy, GitHub Actions and more!
 
